@@ -39,6 +39,7 @@ Menu.Heal:Boolean("AutoR", "Auto R", true)
 Menu.Heal:Boolean("AutoW", "Auto W", true)
 Menu.Heal:Slider("RCount", "How many to R?", 2,0,5,1)
 Menu.Heal:Slider("RHP", "HP to R", 20,0,100,1)
+Menu.Heal:Boolean("RSelf", "Always R for self", true)
 Menu.Heal:Slider("Mana", "Minimum mana", 0,0,100,1)
 
 Menu:SubMenu("Misc", "Misc settings")
@@ -151,11 +152,14 @@ end
 function Heal()
 	local needHeal = 0
 	for _, hero in pairs(GetAllyHeroes()) do
-		if not hero == myHero and ValidTarget(hero, Spells.W.range) and (GetMaxHP(hero) - GetCurrentHP(hero)) >= wHeal() and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100) then
+		if hero ~= myHero and ValidTarget(hero, Spells.W.range) and (GetMaxHP(hero) - GetCurrentHP(hero)) >= wHeal() and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100) then
 			castTargetSpell(hero, _W)
 		end
-		if (GetCurretnHP(hero)/GetMaxHP(hero)) > (Menu.Heal.RHP:Value()/100) then
+		if hero and (Menu.Heal.RHP:Value()/100) >= (GetCurretnHP(hero)/GetMaxHP(hero)) then
 			needHeal = (needHeal + 1)
+			if hero == myHero and Menu.Heal.RSelf:Value() then
+				CastR()
+			end
 		end
 	end
 	if needHeal >= Menu.Heal.RCount:Value() then
