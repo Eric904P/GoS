@@ -9,7 +9,7 @@ function AutoUpdate(data)
 	if tonumber(data) > tonumber(ver) then
 		print("New version available! " .. data)
 		print("Downloading update, please wait...")
-		DownloadFileAsync("https://raw.githubusercontent.com/Eric904P/GoS/master/HK_Soraka.lua", SCRIPT_PATH .. "Raka.lua", function() print("Update complete, please 2x F6 to load") return end)
+		DownloadFileAsync("https://raw.githubusercontent.com/Eric904P/GoS/master/HK_Soraka.lua", SCRIPT_PATH .. "HK_Soraka.lua", function() print("Update complete, please 2x F6 to load") return end)
 	end
 end
 
