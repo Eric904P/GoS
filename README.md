@@ -1,5 +1,4 @@
-# GoS
-Gaming on Steroids scripts
+# HK Scripts for GoS
 If sourced from another project, links to originals included below.
 
 Soraka
