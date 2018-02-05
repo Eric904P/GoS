@@ -3,7 +3,11 @@ if GetObjectName(GetMyHero()) ~= "Soraka" then return end
 require("OpenPredict")
 require("DamageLib")
 
+<<<<<<< HEAD
 local ver = "0.04"
+=======
+local ver = "0.02"
+>>>>>>> parent of cc67bad... Merge branch 'master' of https://github.com/Eric904P/GoS
 
 function AutoUpdate(data)
 	if tonumber(data) > tonumber(ver) then
