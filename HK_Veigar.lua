@@ -1,13 +1,15 @@
 --          [[ Champion ]]
 if GetObjectName(GetMyHero()) ~= "Veigar" then return end
 --          [[ Updater ]]
-local ver = "0.06"
+local rver = "0.06"
 
 function AutoUpdate(data)
-    if tonumber(data) > tonumber(ver) then
+    if tonumber(data) > tonumber(rver) then
         print("New version found! " .. data)
         print("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/Eric904P/GoS/master/HK_Veigar.lua", SCRIPT_PATH .. "HK_Veigar.lua", function() print("Update Complete, please 2x F6!") return end)
+    else
+    	print("Version " .. rver .. "HK Veigar loaded!")
     end
 end
 
