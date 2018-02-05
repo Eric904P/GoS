@@ -3,7 +3,7 @@ if GetObjectName(GetMyHero()) ~= "Soraka" then return end
 require("OpenPredict")
 require("DamageLib")
 
-local ver = "0.03"
+local ver = "0.04"
 
 function AutoUpdate(data)
 	if tonumber(data) > tonumber(ver) then
@@ -152,18 +152,18 @@ end
 function Heal()
 	local needHeal = 0
 	for _, hero in pairs(GetAllyHeroes()) do
-		if hero ~= myHero and ValidTarget(hero, Spells.W.range) and (GetMaxHP(hero) - GetCurrentHP(hero)) >= wHeal() and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100) then
+		if Ready(_W) and hero ~= myHero and ValidTarget(hero, Spells.W.range) and (GetCurrentHP(hero)/GetMaxHP(hero)) >= 0.8 and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100) then
 			castTargetSpell(hero, _W)
 		end
-		if hero and (Menu.Heal.RHP:Value()/100) >= (GetCurretnHP(hero)/GetMaxHP(hero)) then
+		if hero and (Menu.Heal.RHP:Value()/100) >= (GetCurrentHP(hero)/GetMaxHP(hero)) then
 			needHeal = (needHeal + 1)
-			if hero == myHero and Menu.Heal.RSelf:Value() then
-				CastR()
+			if hero == myHero and Menu.Heal.RSelf:Value() and Ready(_R) then
+				castR()
 			end
 		end
 	end
-	if needHeal >= Menu.Heal.RCount:Value() then
-		CastR()
+	if needHeal >= Menu.Heal.RCount:Value() and Ready(_R) then
+		castR()
 	end
 end
 

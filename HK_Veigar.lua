@@ -1,7 +1,7 @@
 --          [[ Champion ]]
 if GetObjectName(GetMyHero()) ~= "Veigar" then return end
 --          [[ Updater ]]
-local ver = "0.05"
+local ver = "0.06"
 
 function AutoUpdate(data)
     if tonumber(data) > tonumber(ver) then
@@ -171,7 +171,7 @@ function Combo()
 			VeigarW()
 			end
 --		[[ Use W Only Stun ]]
-		if VeigarMenu.Combo.WS:Value() and ValidTarget(target, GetCastRange(myHero, _W)) and GotBuff(target, "veigareventhorizonstun") > 0  then
+		if VeigarMenu.Combo.WS:Value() and Ready(_W) and ValidTarget(target, GetCastRange(myHero, _W)) and GotBuff(target, "veigareventhorizonstun") > 0  then
 			VeigarW()
 			end
 --		[[ Use E ]]
