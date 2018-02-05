@@ -9,7 +9,7 @@ function AutoUpdate(data)
         print("Downloading update, please wait...")
         DownloadFileAsync("https://raw.githubusercontent.com/Eric904P/GoS/master/HK_Veigar.lua", SCRIPT_PATH .. "HK_Veigar.lua", function() print("Update Complete, please 2x F6!") return end)
     else
-    	print("Version " .. rver .. "HK Veigar loaded!")
+    	print("Version " .. ver .. "HK Veigar loaded!")
     end
 end
 
