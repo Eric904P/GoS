@@ -152,12 +152,12 @@ end
 function Heal()
 	local needHeal = 0
 	for _, hero in pairs(GetAllyHeroes()) do
-		if IsObjectAlive(myHero) and Menu.Heal.AutoW:Value() and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100)  then
+		if Menu.Heal.AutoW:Value() and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Heal.Mana:Value()/100)  then
 			if Ready(_W) and hero ~= myHero and ValidTarget(hero, 550) and (GetCurrentHP(hero)/GetMaxHP(hero)) <= 0.8 then
-				castTargetSpell(hero, _W)
+				CastTargetSpell(hero, _W)
 			end
 		end
-		if hero and (Menu.Heal.RHP:Value()/100) >= (GetCurrentHP(hero)/GetMaxHP(hero)) then
+		if IsObjectAlive(hero) and (Menu.Heal.RHP:Value()/100) >= (GetCurrentHP(hero)/GetMaxHP(hero)) then
 			needHeal = (needHeal + 1)
 			if hero == myHero and Menu.Heal.RSelf:Value() and Ready(_R) then
 				castR()
@@ -167,6 +167,14 @@ function Heal()
 		end
 		if needHeal >= Menu.Heal.RCount:Value() and Ready(_R) and IsObjectAlive(myHero) then
 			castR()
+		end
+	end
+end
+
+function SimpleHeal()
+	for _,ally in pairs(GetAllyHeroes()) do
+		if Ready(_W) and ValidTarget(ally,550) and (GetCurrentHP(ally)/GetMaxHP(ally)) <= 0.8 then
+			CastTargetSpell
 		end
 	end
 end
