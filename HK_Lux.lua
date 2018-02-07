@@ -88,7 +88,7 @@ end)
 -- Spell Functions
 function castQ()
 	local QPred = GetPrediction(target, Spells.Q)
-	if QPred.hitChance > 0.7 and not QPred:mCollision(1) then 
+	if QPred.hitChance > 0.9 and not QPred:mCollision(1) then 
 		CastSkillShot(_Q, QPred.castPos)
 	end
 end
