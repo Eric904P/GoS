@@ -1,5 +1,5 @@
 -- Champion
-if GetObjectName(GetMyHero()) ~= "" then return end
+if GetObjectName(GetMyHero()) ~= "Lux" then return end
 
 -- Auto Updater
 local ver = "0.01"
