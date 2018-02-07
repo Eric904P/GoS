@@ -94,7 +94,7 @@ function castQ()
 end
 
 function castW()
-	CastSkillShot(_W, myHero.pos)
+	CastSkillShot(_W, GetOrigin(myHero))
 end
 
 function castE()
