@@ -89,23 +89,13 @@ end)
 function castQ()
 	local QPred = GetPrediction(target, Spells.Q)
 	if QPred.hitChance > 0.7 and not QPred:mCollision(1) then 
-		-- this example checks for collision with minions.  See OpenPredict API for details.
 		CastSkillShot(_Q, QPred.castPos)
 	end
 end
 
---function castW()
---	local WPred = GetCircularAOEPrediction(target, Spells.W)
---	if WPred.hitChance > 0.3 then
---		-- this example gets prediction for circular AOE skilshot, such as Veigar W
---		CastSkillShot(_W, WPred.castPos)
---	end
---end
-
 function castE()
 	local EPred = GetCircularAOEPrediction(target, Spells.E)
 	if EPred.hitChance > 0.7 then
-		-- this example gets prediction for conic AOE, such as Cho'gath W
 		CastSkillShot(_E, EPred.castPos)
 	end
 end
@@ -113,8 +103,7 @@ end
 function castR()
 	local RPred = GetLinearAOEPrediction(target, Spells.R)
 	if RPred.hitChance > 0.7 then
-		-- this example gets linear AOE prediction, such as Xerath Q.  This example also includes double-casting of Xerath Q
-		CastSkillShot(_R, RPred.castPos) -- note there is more to casting Xerath Q or Varus Q so please do research
+		CastSkillShot(_R, RPred.castPos) 
 	end
 end
 
@@ -128,7 +117,7 @@ function Combo()
 			CastSpell(_W)
 		end
 		if Menu.Combo.E:Value() and Ready(_E) and ValidTarget(target, Spells.E.range) then
-			castW()
+			castE()
 		end
 		if Menu.Combo.R:Value() and Ready(_R) and ValidTarget(target, Spells.R.range) then
 			local RPred = GetPrediction(enemy, Spells.R)
@@ -198,7 +187,7 @@ end
 OnDraw(function(myHero)
 	local pos = GetOrigin(myHero)
 	
-	if Menu.Draw.Q:Value() then DrawCircle(pos, Spells.Q.range, 0, 25, GoS.Green) end
+	if Menu.Draw.Q:Value() then DrawCircle(pos, Spells.Q.range, 0, 25, GoS.Pink) end
 	if Menu.Draw.W:Value() then DrawCircle(pos, Spells.W.range, 0, 25, GoS.Blue) end
 	if Menu.Draw.E:Value() then DrawCircle(pos, Spells.E.range, 0, 25, GoS.Yellow) end
 	if Menu.Draw.R:Value() then DrawCircle(pos, Spells.R.range, 0, 25, GoS.Red) end
