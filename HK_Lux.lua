@@ -93,6 +93,10 @@ function castQ()
 	end
 end
 
+function castW()
+	CastSkillShot(_W, myHero.pos)
+end
+
 function castE()
 	local EPred = GetCircularAOEPrediction(target, Spells.E)
 	if EPred.hitChance > 0.7 then
@@ -114,7 +118,7 @@ function Combo()
 			castQ()
 		end
 		if Menu.Combo.W:Value() and Ready(_W) and (GetCurrentHP(myHero)/GetMaxHP(myHero)) < 0.3 then
-			CastSpell(_W)
+			castW()
 		end
 		if Menu.Combo.E:Value() and Ready(_E) and ValidTarget(target, Spells.E.range) then
 			castE()
@@ -136,7 +140,7 @@ function Harass()
 			castQ()
 		end
 		if Menu.Harass.W:Value() and Ready(_W) and (GetCurrentHP(myHero)/GetMaxHP(myHero)) < 0.3 and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Harass.Mana:Value()/100) then
-			CastSpell(_W)
+			castW()
 		end
 		if Menu.Harass.E:Value() and Ready(_E) and ValidTarget(target, Spells.E.range) and (GetCurrentMana(myHero)/GetMaxMana(myHero)) >= (Menu.Harass.Mana:Value()/100) then
 			castE()
@@ -174,6 +178,18 @@ end
 -- Kill Steal
 function KS()
 	for _, enemy in pairs(GetEnemyHeroes()) do
+		if Ready(_Q) and ValidTarget(enemy, Spells.Q.range) then
+			local QPred = GetPrediction(enemy, Spells.Q)
+			if GetHealthPrediction(enemy, QPred.timeToHit) < getdmg("Q", enemy, myHero) then
+				CastSkillShot(_Q, QPred.castPos)
+			end
+		end
+		if Ready(_E) and ValidTarget(enemy, Spells.E.range) then
+			local EPred = GetCircularAOEPrediction(enemy, Spells.E)
+			if GetHealthPrediction(enemy, EPred.timeToHit) < getdmg("E", enemy, myHero) then
+				CastSkillShot(_E, EPred.castPos)
+			end
+		end
 		if Ready(_R) and ValidTarget(enemy, Spells.R.range) then
 			local RPred = GetPrediction(enemy, Spells.R)
 			if GetHealthPrediction(enemy, RPred.timeToHit) < getdmg("R", enemy, myHero) then
